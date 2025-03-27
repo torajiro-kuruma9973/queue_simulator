@@ -21,7 +21,7 @@ class q:
 		out = self.Q[idx:end]
 		self.Q = self.Q[end:]
 		self.mutex.release()
-		print(f"out len: {len(out)}")
+		#print(f"out len: {len(out)}")
 		return out
 
 	def get_Nq(self):
@@ -65,7 +65,7 @@ class q:
 		if expacted_size > max_size: # still have time for waiting
 			wait = True
 		self.mutex.release()
-		print(f"s:{max_size}, id:{max_idx}")
+		#print(f"s:{max_size}, id:{max_idx}")
 		return max_size, wait
 
 

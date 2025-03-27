@@ -20,7 +20,7 @@ class users:
 			j = job.job(self.n)
 
 			self.q.q_input(j)
-			print(f'{self.n}:t:{j.time_stamp}')
+			#print(f'{self.n}:t:{j.time_stamp}')
 
 	def total_reqts(self):
 		return self.n

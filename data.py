@@ -7,6 +7,7 @@ class data:
 		self.result.append(val)
 
 	def average(self):
+		self.result.pop() # the last data may be not effective
 		return sum(self.result) / len(self.result)
 
 	def sum(self):

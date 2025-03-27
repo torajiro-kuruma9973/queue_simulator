@@ -7,7 +7,7 @@ class dispatch:
 	#result = []
 	lost = 0
 
-	def __init__(self, slo, q, gpu, epsilon, total_time, data):
+	def __init__(self, nice, slo, q, gpu, epsilon, total_time, data):
 		self.SLO = slo # unit: s
 		self.q = q
 		self.gpu = gpu
@@ -20,6 +20,7 @@ class dispatch:
 		#print(f"max_size = {self.max_size}")
 		self.job_picked_idx = 0
 		self.size_to_be_processed = 0
+		self.nice = nice
 
 	def __clear__(self):
 		self.size_to_be_processed = 0
@@ -70,14 +71,15 @@ class dispatch:
 				case "FIND_BEST_IDX":
 					self.size_to_be_processed, wait = self.q.__early_drop__(self.max_size, self.SLO)
 					if wait:
+						time.sleep(self.nice)
 						self.state = "FIND_BEST_IDX"
 					else:
 						self.state = "EXECUTE_GPU"
 
 				case "EXECUTE_GPU":
-					print("EXECUTE_GPU")
+					#print("EXECUTE_GPU")
 					self.data.save_data(self.size_to_be_processed)
-					print(f'B:{self.size_to_be_processed}')
+					#print(f'B:{self.size_to_be_processed}')
 					job_list = self.q.q_output(0, self.size_to_be_processed)
 					#for job in job_list:
 						#print(f"job:{job.id}")
